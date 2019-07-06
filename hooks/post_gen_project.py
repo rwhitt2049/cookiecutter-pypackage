@@ -8,22 +8,22 @@ def remove_file(filepath):
     os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
 
 
-if __name__ == '__main__':
+def remove_folder(folder_path):
+    os.rmdir(os.path.join(PROJECT_DIRECTORY, folder_path))
 
-    if '{{ cookiecutter.create_author_file }}' != 'y':
-        remove_file('AUTHORS.rst')
-        remove_file('docs/authors.rst')
 
-    if '{{ cookiecutter.use_pytest }}' == 'y':
-        remove_file('tests/__init__.py')
+if __name__ == "__main__":
 
-    if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
-        cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
+    if "{{ cookiecutter.use_pytest }}" == "y":
+        remove_file("tests/__init__.py")
+
+    if "no" in "{{ cookiecutter.command_line_interface|lower }}":
+        cli_file = os.path.join("{{ cookiecutter.project_slug }}", "cli.py")
         remove_file(cli_file)
 
-    if 'Not open source' == '{{ cookiecutter.open_source_license }}':
-        remove_file('LICENSE')
+    if "Not open source" == "{{ cookiecutter.open_source_license }}":
+        remove_file("LICENSE")
 
-    if '{{ cookiecutter.create_conda_recipe }}' == 'n':
-        remove_file('conda_recipe/meta.yaml')
-        remove_folder('conda_recipe')
+    if "{{ cookiecutter.create_conda_recipe }}" == "n":
+        remove_file("conda_recipe/meta.yaml")
+        remove_folder("conda_recipe")
