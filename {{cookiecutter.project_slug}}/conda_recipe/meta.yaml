@@ -1,0 +1,33 @@
+{% raw -%}
+{% set build_number = 0 %}
+{% set data = load_setup_py_data() %}
+{%- endraw %}
+
+package:
+  name: {{ cookiecutter.project_slug }}
+  version: {% raw -%} {{ data.get('version') | replace('-', '.' ) }} {%- endraw %}
+
+source:
+  path: ..
+
+build:
+  number: {% raw -%} {{ build_number }} {%- endraw %}
+  noarch: python
+  script: python -m pip install --no-deps --ignore-installed .
+  {%- if 'no' not in cookiecutter.command_line_interface|lower %}
+  entry_points:
+    - {{ cookiecutter.project_slug }} = {{ cookiecutter.project_slug }}.cli:main
+  {%- endif %}
+
+
+requirements:
+  build:
+    - python
+    - pip
+
+  run:
+    - python
+
+test:
+  imports:
+    - {{ cookiecutter.project_slug }}
