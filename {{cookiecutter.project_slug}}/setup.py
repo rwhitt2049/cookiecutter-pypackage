@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""The setup script."""
-
 from setuptools import setup, find_packages
+from codecs import open
+import glob
 
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+def read_files(path):
+    with open(path, encoding="utf-8") as fid:
+        return fid.read()
 
-requirements = [{%- if cookiecutter.command_line_interface|lower == 'click' %}'Click>=6.0',{%- endif %} ]
 
-setup_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest-runner',{%- endif %} ]
-
-test_requirements = [{%- if cookiecutter.use_pytest == 'y' %}'pytest',{%- endif %} ]
+requirements_doc = read_files("requirements_doc.txt").splitlines()
+requirements_dev = read_files("requirements_dev.txt").splitlines()
+requirements = read_files("requirements.txt").splitlines()
+readme = read_files("README.md")
+version = read_files("VERSION").strip()
 
 {%- set license_classifiers = {
     'MIT license': 'License :: OSI Approved :: MIT License',
@@ -60,9 +60,9 @@ setup(
     keywords='{{ cookiecutter.project_slug }}',
     name='{{ cookiecutter.project_slug }}',
     packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
-    setup_requires=setup_requirements,
+    package_dir={"": "src"},
     test_suite='tests',
-    tests_require=test_requirements,
+    tests_require=requirements_dev,
     url='https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}',
     version='{{ cookiecutter.version }}',
     zip_safe=False,
