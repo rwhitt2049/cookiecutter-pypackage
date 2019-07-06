@@ -59,7 +59,7 @@ setup(
     include_package_data=True,
     keywords='{{ cookiecutter.project_slug }}',
     name='{{ cookiecutter.project_slug }}',
-    packages=find_packages(include=['{{ cookiecutter.project_slug }}']),
+    packages=find_packages(where="src"),
     package_dir={"": "src"},
     test_suite='tests',
     tests_require=requirements_dev,
