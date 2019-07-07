@@ -9,12 +9,20 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 charset = utf-8
 end_of_line = lf
+max_line_length = 93
 
 [*.bat]
 indent_style = tab
 end_of_line = crlf
 
-[LICENSE]
+[*.rst]
+indent_size = 3
+max_line_length = 80
+
+[{*.json, *.yml, *.yaml}]
+indent_size = 2
+
+[{LICENSE, VERSION, requirements*.txt}]
 insert_final_newline = false
 
 [Makefile]

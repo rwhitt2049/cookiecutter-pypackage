@@ -83,10 +83,12 @@ docs/_build/
 # IntelliJ Idea family of suites
 .idea
 *.iml
-## File-based project format:
+
+# File-based project format:
 *.ipr
 *.iws
-## mpeltonen/sbt-idea plugin
+
+# mpeltonen/sbt-idea plugin
 .idea_modules/
 
 # PyBuilder
